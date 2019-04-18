@@ -24,9 +24,8 @@ func (b *Block) ComputeHash() []byte {
 }
 
 func (b *Block) Mine(difficulty int) {
-	target := createTarget(difficulty)
 	bHash := PrintBytes(b.Hash)
-	for bHash[0:difficulty] != target {
+	for bHash[0:difficulty] != TargetDifficulty(difficulty) {
 		b.Nonce += 1
 		b.Hash = b.ComputeHash()
 		bHash = PrintBytes(b.Hash)
@@ -45,12 +44,12 @@ func (b *Block) hashText() string {
 func (b *Block) ToString() string {
 	previousHash := PrintBytes(b.PreviousHash)
 	hash := PrintBytes(b.Hash)
-	carOwner := b.Data.Owner
+	data := b.Data.ToString()
 	nonceString := strconv.Itoa(b.Nonce)
 	blockString := "Block: \n"
 	blockString += "PreviousHash => " + previousHash + "\n"
 	blockString += "Hash         => " + hash + "\n"
-	blockString += "Owner        => " + carOwner + "\n"
+	blockString += "Data         => " + data + "\n"
 	blockString += "Nonce        => " + nonceString + "\n"
 	return blockString
 }
@@ -71,14 +70,4 @@ func InitialCarBlock(carData CarData) *Block {
 	b.Nonce = 0
 	b.Finalize()
 	return b
-}
-
-/** Privates **/
-
-func createTarget(difficulty int) string {
-	target := ""
-	for x := 0; x < difficulty; x++ {
-		target += "0"
-	}
-	return target
 }

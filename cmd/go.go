@@ -59,7 +59,7 @@ func createBlockChain(cars []*bc.CarData) *bc.Chain {
 
 	initialBlock := bc.InitialCarBlock(*cars[0])
 	initialBlock.Mine(DIFFICULTY)
-	blockChain := bc.NewChain(initialBlock)
+	blockChain := bc.NewChain(initialBlock, DIFFICULTY)
 
 	for index := 1; index < len(cars); index++ {
 		newBlock := bc.NewCarBlock(blockChain.LatestHash, *cars[index])
