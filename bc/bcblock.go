@@ -12,6 +12,10 @@ type Block struct {
 	TimeStamp    time.Time
 }
 
+func (b *Block) ComputeHash() []byte {
+	return GetCarHash(b.Data)
+}
+
 func (b *Block) ToString() string {
 	var previousHash = PrintBytes(b.PreviousHash)
 	var hash = PrintBytes(b.Hash)

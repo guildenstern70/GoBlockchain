@@ -27,6 +27,15 @@ func main() {
 	for b := range blockchain.Blocks {
 		fmt.Println(blockchain.Blocks[b].ToString())
 	}
+
+	// Step 5: Validate blockchain
+	var isValid = blockchain.IsValid()
+	if isValid {
+		fmt.Println("Blockchain is VALID.")
+	} else {
+		fmt.Println("** Blockchain is NOT valid. **")
+	}
+
 }
 
 func createData() []*bc.CarData {
