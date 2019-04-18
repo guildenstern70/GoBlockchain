@@ -8,7 +8,7 @@ import (
 
 // VERSION OF GO-BLOCKCHAIN
 const VERSION = "0.2"
-const DIFFICULTY = 3
+const DIFFICULTY = 4
 
 func main() {
 	fmt.Printf("GoBLOCKCHAIN v.%s\n\n", VERSION)

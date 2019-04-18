@@ -13,7 +13,7 @@ type CarData struct {
 }
 
 func (c *CarData) ToString() string {
-	return "Car owned by: " + c.Owner + " EUR." + strconv.Itoa(c.Value) + " " + c.ChangeDate.Format(time.RFC3339)
+	return "Car owned by: " + c.Owner + "\t Value:" + strconv.Itoa(c.Value) + " EUR\t TRX:" + c.ChangeDate.Format(time.RFC3339)
 }
 
 // Hashed data
