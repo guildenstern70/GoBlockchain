@@ -3,6 +3,7 @@ package bc
 import (
 	"bytes"
 	"fmt"
+	"strconv"
 )
 
 // Blockchain chain
@@ -22,12 +23,12 @@ func (c *Chain) Append(block *Block) int {
 func (c *Chain) IsValid() bool {
 	for b := range c.Blocks {
 		if !bytes.Equal(c.Blocks[b].Hash, c.Blocks[b].ComputeHash()) {
-			fmt.Println("Current Hashes not equal")
+			fmt.Println("Current Hashes not equal [Block #" + strconv.Itoa(b) + "]")
 			return false
 		}
 		if b > 1 {
 			if !bytes.Equal(c.Blocks[b-1].Hash, c.Blocks[b].PreviousHash) {
-				fmt.Println("Previous Hashes not equal")
+				fmt.Println("Previous Hashes not equal [Block #" + strconv.Itoa(b) + "]")
 				return false
 			}
 		}
