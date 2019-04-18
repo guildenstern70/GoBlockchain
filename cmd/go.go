@@ -7,13 +7,14 @@ import (
 )
 
 // VERSION OF GO-BLOCKCHAIN
-const VERSION = "0.1"
+const VERSION = "0.2"
+const DIFFICULTY = 3
 
 func main() {
-	fmt.Printf("GoBLOCKCHAIN v.%s\n", VERSION)
+	fmt.Printf("GoBLOCKCHAIN v.%s\n\n", VERSION)
 
 	// Step 1. Create Data
-	var cars = createData()
+	cars := createData()
 
 	// Step 2: Print cars
 	for c := range cars {
@@ -29,8 +30,7 @@ func main() {
 	}
 
 	// Step 5: Validate blockchain
-	var isValid = blockchain.IsValid()
-	if isValid {
+	if blockchain.IsValid() {
 		fmt.Println("Blockchain is VALID.")
 	} else {
 		fmt.Println("** Blockchain is NOT valid. **")
@@ -58,10 +58,12 @@ func createData() []*bc.CarData {
 func createBlockChain(cars []*bc.CarData) *bc.Chain {
 
 	initialBlock := bc.InitialCarBlock(*cars[0])
+	initialBlock.Mine(DIFFICULTY)
 	blockChain := bc.NewChain(initialBlock)
 
 	for index := 1; index < len(cars); index++ {
 		newBlock := bc.NewCarBlock(blockChain.LatestHash, *cars[index])
+		newBlock.Mine(DIFFICULTY)
 		blockChain.Append(newBlock)
 	}
 

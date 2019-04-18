@@ -19,7 +19,7 @@ func (c *Chain) Append(block *Block) int {
 	return len(c.Blocks)
 }
 
-// Return chain validityu
+// Return chain validity
 func (c *Chain) IsValid() bool {
 	for b := range c.Blocks {
 		if !bytes.Equal(c.Blocks[b].Hash, c.Blocks[b].ComputeHash()) {
